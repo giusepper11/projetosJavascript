@@ -420,10 +420,15 @@ class CalcController {
     };
 
     get displayCalc() {
+        
         return this._displayCalcEl.innerHTML;
     };
 
     set displayCalc(valor) {
+        if (valor.toString().length > 10) {
+            this.setError();
+            return false;
+        }
         this._displayCalcEl.innerHTML = valor;
     };
 
