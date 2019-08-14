@@ -105,9 +105,15 @@ class UserController {
     <td>${dataUser.admin ? "Sim" : "Não"}</td>
     <td>${Utils.dateFormat(dataUser.register)}</td>
     <td>
-      <button type="button" class="btn btn-primary btn-xs btn-flat">Editar</button>
+      <button type="button" class="btn btn-primary btn-xs btn-flat btn-edit">Editar</button>
       <button type="button" class="btn btn-danger btn-xs btn-flat">Excluir</button>
     </td>`;
+
+    tr.querySelector("btn-edit").addEventListener(
+      'click', e => {
+        
+      });
+
     this.tableId.appendChild(tr);
 
     this.updateCount()
@@ -122,10 +128,10 @@ class UserController {
       let user = JSON.parse(tr.dataset.user);
       if (user._admin) {
         numberAdmin++
-      }      
+      }
     });
 
     $('#number-users').innerHTML = numberUsers
     $('#number-users-admin').innerHTML = numberAdmin
-  }//
+  } //
 };
