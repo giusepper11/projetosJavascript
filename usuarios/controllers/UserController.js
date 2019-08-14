@@ -4,7 +4,7 @@ class UserController {
     this.tableId = $(`#${tableId}`);
 
     this.onSubmit();
-  }
+  } //
 
   onSubmit() {
     this.formEl.addEventListener("submit", event => {
@@ -15,7 +15,11 @@ class UserController {
       btn.disabled = true;
 
       let values = this.getValues();
-      console.log(values);
+
+      if (!values) {
+        btn.disabled = false;
+        return false;
+      }
 
       this.getPhoto().then(
         content => {
@@ -51,15 +55,18 @@ class UserController {
 
       file ? fileReader.readAsDataURL(file) : resolve("dist/img/boxed-bg.jpg");
     });
-  }
+  } //
 
   getValues() {
     let user = {};
+    let isValid = true;
     [...this.formEl.elements].forEach((field, index) => {
 
-        if(['name','email','password']){
+      if (['name', 'email', 'password'].indexOf(field.name) > -1 && !field.value) {
 
-        }
+        field.parentElement.classList.add('has-error');
+        isValid = false;
+      }
       if (field.name == "gender" && field.checked) {
         user[field.name] = field.value;
       } else if (field.name == "admin") {
@@ -68,6 +75,10 @@ class UserController {
         user[field.name] = field.value;
       }
     }); //
+
+    if (!isValid) {
+      return false;
+    }
     return new User(
       user.name,
       user.gender,
@@ -82,6 +93,9 @@ class UserController {
 
   addLine(dataUser) {
     let tr = document.createElement("tr");
+
+    tr.dataset.user = JSON.stringify(dataUser);
+
     tr.innerHTML = `
       <td><img src="${
         dataUser.photo
@@ -95,5 +109,23 @@ class UserController {
       <button type="button" class="btn btn-danger btn-xs btn-flat">Excluir</button>
     </td>`;
     this.tableId.appendChild(tr);
+
+    this.updateCount()
   } //
-}
+
+  updateCount() {
+
+    let numberUsers = 0;
+    let numberAdmin = 0;
+    [...this.tableId.children].forEach(tr => {
+      numberUsers++;
+      let user = JSON.parse(tr.dataset.user);
+      if (user._admin) {
+        numberAdmin++
+      }      
+    });
+
+    $('#number-users').innerHTML = numberUsers
+    $('#number-users-admin').innerHTML = numberAdmin
+  }//
+};
