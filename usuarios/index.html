@@ -216,7 +216,7 @@
                 <!-- ./col -->
               </div>
 
-              <div class="box box-success">
+              <div class="box box-success" id="box-user-create">
                 <div class="box-header with-border">
                   <h3 class="box-title">Novo Usuário</h3>
                 </div>
@@ -243,6 +243,7 @@
                             type="radio"
                             id="exampleInputGenderM"
                             name="gender"
+                            value="M"
                           />
                           Masculino</label
                         >
@@ -253,6 +254,7 @@
                             type="radio"
                             id="exampleInputGenderF"
                             name="gender"
+                            value="F"
                           />
                           Feminino</label
                         >
@@ -660,7 +662,7 @@
                 </form>
               </div>
 
-              <div class="box box-primary" style="display: none">
+              <div class="box box-primary" style="display: none" id="box-user-update">
                 <div class="box-header with-border">
                   <h3 class="box-title">Novo Usuário</h3>
                 </div>
@@ -687,6 +689,7 @@
                             type="radio"
                             id="exampleInputGenderM"
                             name="gender"
+                            value="M"
                           />
                           Masculino</label
                         >
@@ -697,6 +700,7 @@
                             type="radio"
                             id="exampleInputGenderF"
                             name="gender"
+                            value="F"
                           />
                           Feminino</label
                         >
@@ -1081,6 +1085,7 @@
                       />
                     </div>
                     <div class="form-group">
+                      <img src="dist/img/boxed-bg.jpg" class="photo" style="max-height: 128px">
                       <label for="exampleInputFile">Foto</label>
                       <input type="file" id="exampleInputFile" name="photo" />
                     </div>
@@ -1100,7 +1105,7 @@
                     <button type="submit" class="btn btn-primary">
                       Salvar
                     </button>
-                    <button type="button" class="btn btn-default">
+                    <button type="button" class="btn btn-default btn-cancel">
                       Cancelar
                     </button>
                   </div>
